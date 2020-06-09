@@ -1,0 +1,11 @@
+<div data-surface="back" *ngIf="$cvvEvent | async as cvvEvent" class="card card-back">
+  <div class="black-line"></div>
+
+  <div #cvvCode [ngClass]="{'underscore-cvv': state.focus === 'cvv','error-number': state.errors?.cvv.length}"  data-focus="cvv" class="cvv-code" onselectstart="return false;" onpaste="return false" >
+    <span [ngClass]="{'highlight-digit': cvvEvent.state?.cvv.split('')[0]}">{{ cvvEvent.state?.cvv.split('')[0] ? '*' : '0' }}</span>
+    <span [ngClass]="{'highlight-digit': cvvEvent.state?.cvv.split('')[1]}">{{ cvvEvent.state?.cvv.split('')[1] ? '*' : '0' }}</span>
+    <span [ngClass]="{'highlight-digit': cvvEvent.state?.cvv.split('')[2]}">{{ cvvEvent.state?.cvv.split('')[2] ? '*' : '0' }}</span>
+  </div>
+
+  <span class="error-message" [ngClass]="{'error-teaser': !state.focus?.length && state?.card.cvv.length > 0 }" [ngStyle]="{'top': cvvCode.offsetHeight + cvvCode.offsetTop + 'px', 'position': 'absolute', 'right': 15 + 'px', 'opacity': state.errors.cvv.length ? 1 : 0}">{{ state.errors?.cvv.length ? state.errors?.cvv : ''  }}</span>
+</div>

@@ -1,0 +1,33 @@
+@import "../../../style/variables";
+
+.card-back {
+  display: grid;
+  grid-template-columns: repeat(1fr);
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    ". ."
+    "black-line black-line"
+    ". cvv"
+    ". .";
+
+  .black-line {
+    grid-area: black-line;
+    background-color: rgb(34, 34, 34);
+    width: 100%;
+    height: 100%;
+  }
+
+  .cvv-code {
+    grid-area: cvv;
+    display: block;
+    justify-self: flex-end;
+    align-self: flex-start;
+    margin-right: 25px;
+    border-bottom: 2px solid $placeholder-color;
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+.underscore-cvv {
+  border-bottom: 2px solid #fff !important;
+}

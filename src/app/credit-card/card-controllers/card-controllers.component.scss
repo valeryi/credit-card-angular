@@ -1,0 +1,168 @@
+@import "../../../style/variables";
+
+.controllers-wrapper {
+  width: 400px;
+  padding-top: 20px;
+  display: grid;
+  justify-items: center;
+
+  .keyboard-wrapper {
+    width: 90%;
+  }
+
+  .cvv-keyboard {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(1fr);
+    grid-template-rows: repeat(1fr);
+    grid-template-areas:
+      "n1 n2 n3"
+      "n4 n5 n6"
+      "n7 n8 n9"
+      ". n0 erase";
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+
+    span {
+      border: 1px solid $primary-color;
+      border-radius: 50%;
+      width: $btn-cvv-size;
+      height: $btn-cvv-size;
+      line-height: $btn-cvv-size;
+      text-align: center;
+      font-size: 36px;
+      margin-top: 15px;
+      color: $primary-color;
+      background-color: $keyboard-color;
+
+      &:active {
+        transition: all 0.2s ease-in-out !important;
+        transform: scale(0.95);
+      }
+    }
+
+    span#erase {
+      align-self: center;
+      border: 1px solid $primary-color;
+      grid-area: erase;
+      display: block;
+      width: $btn-cvv-size - $arrow;
+      margin-left: $arrow;
+      height: $btn-cvv-size / 2;
+      border-radius: 1px;
+      line-height: $btn-cvv-size / 2;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: -$arrow + -13px;
+        border: $arrow - 3px solid;
+        border-left-color: transparent;
+        border-right-color: $keyboard-color;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: -$arrow + -14px;
+        border: $arrow - 3px solid;
+        border-left-color: transparent;
+        border-right-color: $primary-color;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+      }
+    }
+
+    .n1 {
+      grid-area: n1;
+    }
+
+    .n2 {
+      grid-area: n2;
+    }
+
+    .n3 {
+      grid-area: n3;
+    }
+
+    .n4 {
+      grid-area: n4;
+    }
+
+    .n5 {
+      grid-area: n5;
+    }
+
+    .n6 {
+      grid-area: n6;
+    }
+
+    .n7 {
+      grid-area: n7;
+    }
+
+    .n8 {
+      grid-area: n8;
+    }
+
+    .n9 {
+      grid-area: n9;
+    }
+
+    .n0 {
+      grid-area: n0;
+    }
+  }
+
+  .action-set {
+    width: 100%;
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "left center right";
+
+    .btn {
+      padding: 7px 15px;
+      background-color: #fff;
+      border: 2px solid $primary-color;
+      border-radius: 15px;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: bold;
+      color: $primary-color;
+      letter-spacing: 1px;
+      transition: all 0.5s ease-in-out;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    #btb-back {
+      grid-area: left;
+      justify-self: start;
+    }
+
+    #btb-next {
+      grid-area: right;
+      justify-self: end;
+    }
+
+    #btb-submit {
+      grid-area: center;
+      justify-self: center;
+    }
+  }
+}
+
+.disabled {
+  opacity: 0.3;
+}

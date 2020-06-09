@@ -1,0 +1,20 @@
+<div class="controllers-wrapper" *ngIf="$stepperEvent | async as stepperEvent">
+  <div class="keyboard-wrapper" *ngIf="$focusEvent | async as focusEvent">
+
+    <div class="cvv-keyboard" *ngIf="focusEvent.type === 'focus' && focusEvent.focus?.element?.name === 'cvv' && $cvvEvent | async">
+      <span *ngFor="let number of numbers; let i = index" [class]="'n' + number.order" [attr.data-cvv]="i">{{i}}</span>
+      <span id="erase" [attr.data-cvv]="'erase'"><i [attr.data-cvv]="'erase'" class="material-icons">close</i></span>
+    </div>
+
+  </div>
+  <div class="action-set" >
+    <button *ngIf="stepperEvent.surface === 'back'" class="btn" id="btb-back" data-stepper="front">Back</button>
+
+    <button data-action="submit" class="btn disabled" *ngIf="stepperEvent.surface === 'back'" (click)="submit()" [ngClass]="{'disabled': cardBackValidation() }" [disabled]="cardBackValidation()">
+      <span *ngIf="loading">Checking ...</span>
+      <span *ngIf="!loading">Submit</span>
+    </button>
+    <button *ngIf="stepperEvent.surface === 'front'" class="btn" id="btb-next" data-stepper="back" [ngClass]="{'disabled': cardFrontValidation() }" [disabled]="cardFrontValidation()" >Next</button>
+  </div>
+
+</div>

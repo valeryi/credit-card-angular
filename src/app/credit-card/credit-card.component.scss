@@ -1,0 +1,17 @@
+@import '../../style/variables';
+
+.card-overlay {
+  position: absolute;
+  border: 2px solid $focus-color;
+  border-radius: 15px;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+
+  display: none;
+  pointer-events: none;
+
+  transition: all .5s ease-in-out;
+}

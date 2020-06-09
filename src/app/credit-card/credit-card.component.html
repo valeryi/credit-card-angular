@@ -1,0 +1,13 @@
+<div #creditCard class="wrapper">
+
+  <app-notifier></app-notifier>
+
+  <div  class="credit-card" *ngIf="$stepperEvent | async as stepperEvent">
+    <div #card class="card-wrapper" [ngClass]="stepperEvent.surface === 'back' ? 'flipped-card' : null">
+      <app-card-front></app-card-front>
+      <app-card-back></app-card-back>
+      <div #cardOverlay class="card-overlay"></div>
+    </div>
+  </div>
+  <app-card-controllers></app-card-controllers>
+</div>

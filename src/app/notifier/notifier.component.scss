@@ -1,0 +1,30 @@
+@import '../../style/variables';
+
+.notifier {
+  position: absolute;
+  border-radius: 15px;
+  left: 15px;
+  top: 15px;
+  border: 1px solid $primary-color;
+  display: flex;
+  gap: 5px;
+  padding: 15px 10px;
+  opacity: 0;
+  transition: all .5s ease-in-out;
+  background-color: #fff;
+  z-index: 10000;
+
+  span {
+    &:last-child {
+      padding-left: 5px;
+      font-weight: bold;
+    }
+  }
+
+}
+
+.show {
+  opacity: 1;
+}
+
+

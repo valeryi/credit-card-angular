@@ -1,0 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  display: block;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  height: 100vh;
+  user-select: text;
+}
+
+.wrapper {
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+}
+
+.credit-card {
+  width: 400px;
+  height: 220px;
+  perspective: 1000px;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1.5s;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  background-color: $primary-color;
+  border-radius: 15px;
+  color: $card-text-color;
+}
+
+.flipped-card {
+  transform: rotateY(180deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+*[contenteditable="true"] {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+
+  &:focus {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+
+.highlight-digit {
+  color: #fff !important;
+  position: relative;
+  animation: digitBounce 1s ease-in-out;
+}
+
+.error-number {
+  border-bottom: 2px solid $error-color !important;
+}
+
+.underscore-section {
+  border-bottom: 2px solid #fff;
+}
+
+.error-message {
+  position: absolute;
+  color: $error-color;
+  font-size: 10px;
+  letter-spacing: 1px;
+  transition: all 0.5s ease-in-out;
+}
+
+.error-teaser {
+  animation: messageBounce 1s ease-in-out !important;
+}
+
+@keyframes messageBounce {
+  0% {
+    margin-left: -5px;
+  }
+  20% {
+    margin-left: 5px;
+  }
+  35% {
+    margin-left: -3px;
+  }
+  55% {
+    margin-left: 2px;
+  }
+  70% {
+    margin-left: -2px;
+  }
+  80% {
+    margin-left: 1px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  app-notifier {
+    position: absolute !important;
+    width: 90%;
+    left: 50% !important;
+    transform: translate(-50%, 0) !important;
+    z-index: 1000 !important;
+  }
+
+  .notifier {
+    display: flex !important;
+    flex-direction: row !important;
+    left: 0 !important;
+    background-color: #333 !important;
+    color: #fff !important;
+    max-width: 430px !important;
+
+    .wrapper-notifier {
+      height: 100% !important;
+      width: 100% !important;
+      display: flex !important;
+      font-size: 14px !important;
+      line-height: 14px !important;
+      justify-content: space-between !important;
+    }
+
+    span {
+      &:last-child {
+        padding-left: 5px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .controllers-wrapper {
+    width: 100% !important;
+
+    .keyboard-wrapper {
+      width: 90%;
+    }
+  }
+
+  .wrapper {
+    padding: 15px 10px;
+    display: grid;
+    justify-content: center;
+    align-items: stretch;
+    grid-template-columns: 95%;
+    grid-template-rows: 30% 1fr;
+    grid-template-areas:
+      "card"
+      "controllers";
+  }
+
+  .credit-card {
+    width: 100%;
+    height: 93%;
+    grid-area: card;
+    align-self: end;
+  }
+
+  .logo {
+    align-content: start !important;
+
+    img {
+      width: 70% !important;
+    }
+  }
+
+  .card-front {
+    grid-template-columns: 30% 1fr 30% !important;
+    grid-template-rows: 25% 1fr 1fr !important;
+    padding: 10px 10px 3px 10px !important;
+  }
+
+  .number-wrapper {
+    .number-sections {
+      margin-left: 10px !important;
+      margin-top: -5px !important;
+
+      &:first-child {
+        margin-top: -5px 0 0 0 !important;
+        margin-left: 0 !important;
+      }
+    }
+  }
+
+  .controllers-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 95%;
+    height: 100%;
+    grid-area: controllers;
+    justify-content: flex-start;
+    align-items: center !important;
+
+    .keyboard-wrapper {
+      display: flex !important;
+      justify-content: center !important;
+    }
+
+    .cvv-keyboard {
+      width: 70% !important;
+
+      span {
+        width: $btn-cvv-size-sm !important;
+        height: $btn-cvv-size-sm !important;
+        line-height: $btn-cvv-size-sm !important;
+        font-size: 26px !important;
+        margin-top: 7px !important;
+      }
+
+      span#erase {
+        align-self: center;
+        border: 1px solid $primary-color;
+        grid-area: erase;
+        display: block;
+        width: $btn-cvv-size-sm - $arrow-sm !important;
+        margin-left: $arrow-sm !important;
+        height: $btn-cvv-size-sm / 2 !important;
+        line-height: $btn-cvv-size-sm / 2 !important;
+        z-index: 2 !important;
+
+        &:after, &::before {
+          border: $arrow-sm - 3px solid !important;
+          margin-top: -1px !important;
+
+          border-left-color: transparent !important;
+          border-bottom-color: transparent !important;
+          border-top-color: transparent !important;
+          z-index: 1000 !important;
+        }
+
+        &:after {
+          left: -$arrow-sm + -9px !important;
+          border-right-color: $keyboard-color !important;
+        }
+
+        &::before {
+          left: -$arrow-sm + -10px !important;
+          border-right-color: $primary-color !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<div #notifier [ngClass]="{ show: show }" class="notifier">
+  <div class="wrapper-notifier">
+    <span>{{ notification }}</span>
+    <span (click)="close()">Close</span>
+  </div>
+</div>

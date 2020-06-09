@@ -1,0 +1,32 @@
+<div class="card card-front" data-surface="front">
+
+  <div class="overlay-front"></div>
+
+    <div class="logo" *ngIf="$cardProvider | async as cardProvider;">
+      <img [ngClass]="{'showProvider': logoToggle()}" [src]="cardProvider.url">
+    </div>
+
+    <div contenteditable="true" type="number" pattern="[0-9]*" inputmode="decimal" onpaste="return false" novalidate onselectstart="return false;" #cardNumberEl class="card-number" data-focus="number" tabindex="0" *ngIf="$cardNumber | async as cardNumber">
+      <div class="number-wrapper">
+        <div [ngClass]="{'underscore-section': i * 4 < cardNumber.state?.number.length, 'error-number': cardNumber.errors?.number.length}" *ngFor="let item of numberSectionAmount; index as i" class="number-sections">
+          <ul *ngFor="let item of numberSectionAmount; index as n; i" class="number-section">
+            <li class="number-placeholder" [ngClass]="{'highlight-digit': cardNumber.state?.number.length >= getInputOrder(i, n)}" [attr.data-order]="getInputOrder(i, n)">{{ cardNumber.state?.number.length >= getInputOrder(i, n) ? cardNumber.state.number.split('')[getInputOrder(i, n) - 1] : numberPlaceholder }}</li>
+          </ul>
+        </div>
+      </div>
+      <span class="error-message" [ngClass]="{'error-teaser': cardNumber.errors?.number.length}" [ngStyle]="{'top': cardNumberEl.children[0].offsetHeight + cardNumberEl.children[0].offsetTop + 'px', 'opacity': cardNumber.errors?.number.length ? 1 : 0}">{{ cardNumber.errors?.number.length ? cardNumber.errors?.number : '' }}</span>
+    </div>
+
+    <div contenteditable="true" type="number" pattern="[0-9]*" inputmode="decimal" onpaste="return false" onselectstart="return false;" #expireEl class="expire" data-focus="expire" tabindex="0" *ngIf="$cardExpire | async as cardExpire">
+      <div class="expire-wrapper">
+          <div class="exp-date" [ngClass]="{'underscore-section': cardExpire.state?.month.length, 'error-number': cardExpire.errors?.expire.length}">
+            <div class="exp-month"><span [ngClass]="{'highlight-digit': cardExpire.state?.month.split('')[0]}">{{ cardExpire.state?.month.split('')[0] || numberPlaceholder}}</span><span [ngClass]="{'highlight-digit': cardExpire.state?.month.split('')[1]}">{{ cardExpire.state?.month.split('')[1] || numberPlaceholder}}</span></div>
+            <span [ngClass]="{'highlight-dash': cardExpire.state?.year.length > 0}">/</span>
+            <div class="exp-year"><span [ngClass]="{'highlight-digit': cardExpire.state?.year.split('')[0]}">{{ cardExpire.state?.year.split('')[0] || numberPlaceholder}}</span><span [ngClass]="{'highlight-digit': cardExpire.state?.year.split('')[1]}">{{ cardExpire.state?.year.split('')[1] || numberPlaceholder}}</span></div>
+          </div>
+          <span class="exp-label">valid <br/> thru</span>
+      </div>
+      <span class="error-message" [ngClass]="{'error-teaser': cardExpire.errors?.expire.length > 0}" [ngStyle]="{'top': expireEl.children[0].offsetHeight + expireEl.children[0].offsetTop - 3 + 'px', 'opacity': cardExpire.errors?.expire.length ? 1 : 0}">{{ cardExpire.errors?.expire.length ? cardExpire.errors?.expire : '' }}</span>
+    </div>
+
+</div>
